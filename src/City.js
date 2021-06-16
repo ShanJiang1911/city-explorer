@@ -18,10 +18,21 @@ class City extends React.Component {
         this.setState({ city: e.target.value })
     }
 
+    //function for handle weather
+    //function needs to send lat, lon, searchQuery
+    // - const server = process.env.REACT_APP_BACK_END_SERVER
+    // - let URL = `${server}/weather
+    // - fill in the rest after weaterh (/weather?=lat=5&lon=10&serachQuery)
+
+
     handleSubmit = async (e) => {
         e.preventDefault();
 
+        try {
+
         const key = process.env.REACT_APP_CITY_KEY;
+
+        
 
         let URL = `https://us1.locationiq.com/v1/search.php?key=${key}&q=${this.state.city}&format=json`
 
@@ -35,13 +46,22 @@ class City extends React.Component {
 
         let displayLon = cityInformation.lon;
 
-        this.setState({displayName});
-
         this.setState({displayLat});
 
         this.setState({displayLon});
 
-        console.log(cityInformation);
+        this.setState({displayName});
+
+        } catch(err) {
+            e.preventDefault();
+            debugger;
+            this.setState({
+                errorMessage: `${err.message}: ${err.response.data.error}`
+            })
+        }
+
+
+        // console.log(cityInformation);
     }
 
     render() {
@@ -52,9 +72,12 @@ class City extends React.Component {
                     <input name="city" onChange={this.handleChange} />
                     <Button variant="primary" type="submit">Explore!</Button>
                 </Form>
-                
+                { this.state.errorMessage ? <h3>{this.state.errorMessage}</h3> : ''}
                 <h2>{this.state.displayName}</h2>
+                {this.state.city ?
                 <h3>{this.state.city} is located at {this.state.displayLat} by {this.state.displayLon}</h3>
+                 : ''}
+                <img src={`https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_CITY_KEY}&center=${this.state.displayLat},${this.state.displayLon}&zoom=10`} alt={this.state.city} />
             </>
         )
     }
