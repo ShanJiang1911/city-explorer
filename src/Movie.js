@@ -1,32 +1,17 @@
 import React from 'react';
-import CardColumns from 'react-bootstrap/CardColumns'
-import Card from 'react-bootstrap/Card'
+import ListGroup from 'react-bootstrap/ListGroup';
 
 class Movie extends React.Component {
-
-  render() {
-    let movies = []
-    console.log(this.props.movies)
-    try {
-      movies = this.props.movies.map((movie, idx)=>{
-      console.log(movie);
-      return<Card key ={idx}>
-        <Card.Header>{movie.title}: {movie.average_votes}</Card.Header>
-        <Card.Body>
-          <img src={movie.image_url} alt={`${movie.title} Poster`}/>
-          <Card.Text>{movie.overview}</Card.Text>
-        </Card.Body>
-      </Card>});
-
-    } catch {
-      movies = <Card><Card.Title>Sorry, no movie data was available.</Card.Title></Card>
+    render() {
+        return(
+            <>
+                <h3>Single Special Movie</h3>
+                <ListGroup>
+                    <ListGroup.Item variant="danger">{this.props.Movie.date} : {this.props.Movie.description}</ListGroup.Item>
+                </ListGroup>
+            </>
+        )
     }
-    return(
-      <CardColumns>
-        {movies}
-      </CardColumns>
-  )}
-
 }
 
 export default Movie;

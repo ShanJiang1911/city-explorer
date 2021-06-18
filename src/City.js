@@ -3,13 +3,14 @@ import axios from 'axios';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Weather from './Weather.js'
-import Movie from './Movie.js'
+import Movies from './Movies.js'
 
 class City extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             city: '',
+            weather: '',
             displayName: '',
             displayLat: '',
             displayLon: '',
@@ -64,7 +65,6 @@ class City extends React.Component {
 
         } catch(err) {
             e.preventDefault();
-            // debugger;
             this.setState({
                 errorMessage: `${err.message}: ${err.response.data.error}`
             })
@@ -91,7 +91,7 @@ class City extends React.Component {
 
                 <img src={`https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_CITY_KEY}&center=${this.state.displayLat},${this.state.displayLon}&zoom=15`} alt={this.state.city} />
 
-                {this.state.movies ? <Movie movies={this.state.movies} /> : ''}
+                {this.state.movies ? <Movies movies={this.state.movies} /> : ''}
             </>
         )
     }
