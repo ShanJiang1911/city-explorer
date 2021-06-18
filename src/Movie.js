@@ -1,14 +1,19 @@
 import React from 'react';
-import ListGroup from 'react-bootstrap/ListGroup';
+import Card from 'react-bootstrap/Card';
+
 
 class Movie extends React.Component {
     render() {
         return(
             <>
                 <h3>Single Special Movie</h3>
-                <ListGroup>
-                    <ListGroup.Item variant="danger">{this.props.Movie.date} : {this.props.Movie.description}</ListGroup.Item>
-                </ListGroup>
+                <Card>
+                <Card.Header>{this.props.movie.title}: {this.props.movie.average_votes}</Card.Header>
+                <Card.Body>
+                <img src={this.props.movie.image_url} alt={`${this.props.movie.title} Poster`}/>
+                <Card.Text>{this.props.movie.overview}</Card.Text>
+                </Card.Body>
+                </Card>
             </>
         )
     }
