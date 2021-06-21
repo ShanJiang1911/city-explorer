@@ -63,7 +63,11 @@ class City extends React.Component {
             movies: movieData.data
         });
 
-        } catch(err) {
+        console.log(cityInformation);
+
+        }
+        
+        catch(err) {
             e.preventDefault();
             this.setState({
                 errorMessage: `${err.message}: ${err.response.data.error}`

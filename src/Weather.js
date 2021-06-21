@@ -7,10 +7,10 @@ class Weather extends React.Component {
         return(
             <>
                 <h3>Weather!</h3>
-                {/* <WeatherDay /> */}
+                
                 <ListGroup>
                 {this.props.weather.map((weather, i) => 
-                    <ListGroup.Item key={i} variant="danger">{weather.date} : {weather.description}</ListGroup.Item>
+                    <WeatherDay weather={weather}/>
                 )}
                 </ListGroup>
             </>
